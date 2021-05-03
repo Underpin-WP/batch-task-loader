@@ -7,19 +7,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add this loader.
-add_action( 'underpin/before_setup', function ( $class ) {
+add_action( 'underpin/before_setup', function ( $instance ) {
+	$class = get_class( $instance );
 
+	if ( ! defined( 'UNDERPIN_BATCH_TASKS_ROOT_DIR' ) ) {
+		define( 'UNDERPIN_BATCH_TASKS_ROOT_DIR', plugin_dir_path( __FILE__ ) );
+	}
+
+	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/loaders/Batch_Tasks.php' );
+	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/abstracts/Batch_Task.php' );
+	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/factories/Batch_Task_Instance.php' );
+
+	// Register the loader
+	$instance->loaders()->add( 'batch_tasks', [
+		'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
+	] );
+
+	// Register core-specific items.
 	if ( 'Underpin\Underpin' === $class ) {
 		$dir_url = plugin_dir_url( __FILE__ );
-		define( 'UNDERPIN_BATCH_TASKS_ROOT_DIR', plugin_dir_path( __FILE__ ) );
-		require( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/loaders/Batch_Tasks.php' );
-		require( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/abstracts/Batch_Task.php' );
-		require( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/factories/Batch_Task_Instance.php' );
-
-		// Register the logger
-		Underpin\underpin()->loaders()->add( 'batch_tasks', [
-			'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
-		] );
 
 		// Register the batch JS
 		underpin()->scripts()->add( 'batch', [
