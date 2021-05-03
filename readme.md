@@ -6,14 +6,14 @@ Loader That assists with adding batch tasks to a WordPress website.
 
 ### Using Composer
 
-`composer require underpin/decision-list-loader`
+`composer require underpin/batch-task-loader`
 
 ### Manually
 
 This plugin uses a built-in autoloader, so as long as it is required _before_
 Underpin, it should work as-expected.
 
-`require_once(__DIR__ . '/underpin-decision-lists/decision-lists.php');`
+`require_once(__DIR__ . '/underpin-batch-tasks/batch-tasks.php');`
 
 ## Setup
 
