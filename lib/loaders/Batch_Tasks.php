@@ -32,6 +32,8 @@ class Batch_Tasks extends Loader_Registry {
 	 */
 	protected $abstraction_class = 'Underpin_Batch_Tasks\Abstracts\Batch_Task';
 
+	protected $default_factory = 'Underpin_Batch_Tasks\Factories\Batch_Task_Instance';
+
 	/**
 	 * @inheritDoc
 	 */

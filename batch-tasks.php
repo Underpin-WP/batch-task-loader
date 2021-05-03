@@ -18,7 +18,6 @@ add_action( 'underpin/before_setup', function ( $class ) {
 
 		// Register the logger
 		Underpin\underpin()->loaders()->add( 'batch_tasks', [
-			'instance' => 'Underpin_Batch_Tasks\Abstracts\Batch_Task',
 			'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
 		] );
 

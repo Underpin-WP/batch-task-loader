@@ -34,25 +34,20 @@ A very basic example could look something like this.
 
 ```php
 \Underpin\underpin()->batch_tasks()->add( 'example-batch', [
-	'class' => 'Underpin_Batch_Tasks\Factories\Batch_Task_Instance',
-	'args'  => [
-		[
-			'description'             => 'A batch task that does nothing 20 times',
-			'name'                    => 'Batch Task Example',
-			'tasks_per_request'       => 50,
-			'stop_on_error'           => true,
-			'total_items'             => 1000,
-			'notice_message'          => 'Run the most pointless batch task ever made.',
-			'button_text'             => 'LETS GO.',
-			'capability'              => 'administrator',
-			'batch_id'                => 'example-batch',
-			'task_callback'           => '__return_null', // The callback that iterates on every task
-			'finish_process_callback' => '__return_null', // The callback that runs after everything is finished
-			'prepare_task_callback'   => '__return_null', // The callback that runs before each task
-			'finish_task_callback'    => '__return_null', // The callback that runs after each task
-		],
-	],
-] );
+    'description'             => 'A batch task that does nothing 20 times',
+    'name'                    => 'Batch Task Example',
+    'tasks_per_request'       => 50,
+    'stop_on_error'           => true,
+    'total_items'             => 1000,
+    'notice_message'          => 'Run the most pointless batch task ever made.',
+    'button_text'             => 'LETS GO.',
+    'capability'              => 'administrator',
+    'batch_id'                => 'example-batch',
+    'task_callback'           => '__return_null', // The callback that iterates on every task
+    'finish_process_callback' => '__return_null', // The callback that runs after everything is finished
+    'prepare_task_callback'   => '__return_null', // The callback that runs before each task
+    'finish_task_callback'    => '__return_null', // The callback that runs after each task
+  ] );
 ```
 
 Alternatively, you can extend `batch task` and reference the extended class directly, like so:
