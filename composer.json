@@ -1,0 +1,21 @@
+{
+  "name": "underpin/batch-task-loader",
+  "description": "Batch task Loader for Underpin",
+  "type": "library",
+  "license": "GPL 2.0",
+  "authors": [
+    {
+      "name": "Alex Standiford",
+      "email": "a@alexstandiford.com"
+    }
+  ],
+  "require": {
+    "underpin/script-loader": "^1.0",
+    "underpin/style-loader": "^1.0"
+  },
+  "autoload": {
+    "files": [
+      "batch-tasks.php"
+    ]
+  }
+}
