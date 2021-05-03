@@ -11,7 +11,8 @@
   ],
   "require": {
     "underpin/script-loader": "^1.0",
-    "underpin/style-loader": "^1.0"
+    "underpin/style-loader": "^1.0",
+    "underpin/underpin": "1.2.*"
   },
   "autoload": {
     "files": [
