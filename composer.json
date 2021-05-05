@@ -2,7 +2,7 @@
   "name": "underpin/batch-task-loader",
   "description": "Batch task Loader for Underpin",
   "type": "library",
-  "license": "GPL 2.0",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Alex Standiford",
@@ -12,7 +12,8 @@
   "require": {
     "underpin/script-loader": "^1.0",
     "underpin/style-loader": "^1.0",
-    "underpin/underpin": "1.2.*"
+    "underpin/underpin": "1.2.*",
+    "underpin/logger-loader": "^1.0"
   },
   "autoload": {
     "files": [
