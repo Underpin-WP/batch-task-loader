@@ -7,8 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add this loader.
-add_action( 'underpin/before_setup', function ( $instance ) {
-	$class = get_class( $instance );
+add_action( 'underpin/before_setup', function ( $file ) {
+	$class = get_class( Underpin\underpin()->get( $file ) );
 
 	if ( ! defined( 'UNDERPIN_BATCH_TASKS_ROOT_DIR' ) ) {
 		define( 'UNDERPIN_BATCH_TASKS_ROOT_DIR', plugin_dir_path( __FILE__ ) );
@@ -19,7 +19,7 @@ add_action( 'underpin/before_setup', function ( $instance ) {
 	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/factories/Batch_Task_Instance.php' );
 
 	// Register the loader
-	$instance->loaders()->add( 'batch_tasks', [
+	Underpin\underpin()->get( $file )->loaders()->add( 'batch_tasks', [
 		'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
 	] );
 
