@@ -153,7 +153,7 @@ abstract class Batch_Task {
 		if ( isset( $this->$key ) ) {
 			return $this->$key;
 		} else {
-			return new WP_error( 'batch_task_param_not_set', 'The batch task key ' . $key . ' could not be found.' );
+			return new WP_Error( 'batch_task_param_not_set', 'The batch task key ' . $key . ' could not be found.' );
 		}
 	}
 
