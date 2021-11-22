@@ -22,7 +22,7 @@ Underpin::attach( 'setup', new \Underpin\Factories\Observer( 'batch_tasks', [
 
 	// Register the loader
 		$plugin->loaders()->add( 'batch_tasks', [
-		'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
+		'class' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
 	] );
 
 	// Register core-specific items.
