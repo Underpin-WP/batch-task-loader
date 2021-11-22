@@ -9,7 +9,7 @@
 
 namespace Underpin_Batch_Tasks\Loaders;
 
-use Underpin\Abstracts\Registries\Loader_Registry;
+use Underpin\Abstracts\Registries\Object_Registry;
 use Underpin_Batch_Tasks\Abstracts\Batch_Task;
 use WP_Error;
 use function Underpin\underpin;
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @package Underpin\Registries\Loaders
  */
-class Batch_Tasks extends Loader_Registry {
+class Batch_Tasks extends Object_Registry {
 
 	/**
 	 * @inheritDoc

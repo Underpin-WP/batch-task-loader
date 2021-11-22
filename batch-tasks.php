@@ -1,5 +1,6 @@
 <?php
 
+use Underpin\Abstracts\Underpin;
 use function Underpin\underpin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -7,19 +8,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add this loader.
-add_action( 'underpin/before_setup', function ( $file, $class ) {
-	$class = get_class( Underpin\underpin()->get( $file ) );
+Underpin::attach( 'setup', new \Underpin\Factories\Observer( 'batch_tasks', [
+	'update' => function ( Underpin $plugin ) {
+		$class = get_class( $plugin );
 
-	if ( ! defined( 'UNDERPIN_BATCH_TASKS_ROOT_DIR' ) ) {
-		define( 'UNDERPIN_BATCH_TASKS_ROOT_DIR', plugin_dir_path( __FILE__ ) );
-	}
+		if ( ! defined( 'UNDERPIN_BATCH_TASKS_ROOT_DIR' ) ) {
+			define( 'UNDERPIN_BATCH_TASKS_ROOT_DIR', plugin_dir_path( __FILE__ ) );
+		}
 
-	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/loaders/Batch_Tasks.php' );
-	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/abstracts/Batch_Task.php' );
-	require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/factories/Batch_Task_Instance.php' );
+		require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/loaders/Batch_Tasks.php' );
+		require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/abstracts/Batch_Task.php' );
+		require_once( UNDERPIN_BATCH_TASKS_ROOT_DIR . 'lib/factories/Batch_Task_Instance.php' );
 
 	// Register the loader
-	Underpin\underpin()->get( $file, $class )->loaders()->add( 'batch_tasks', [
+		$plugin->loaders()->add( 'batch_tasks', [
 		'registry' => 'Underpin_Batch_Tasks\Loaders\Batch_Tasks',
 	] );
 
@@ -28,7 +30,7 @@ add_action( 'underpin/before_setup', function ( $file, $class ) {
 		$dir_url = plugin_dir_url( __FILE__ );
 
 		// Register the batch JS
-		underpin()->scripts()->add( 'batch', [
+		$plugin->scripts()->add( 'batch', [
 			'class' => 'Underpin_Scripts\Factories\Script_Instance',
 			'args'  => [
 				[
@@ -49,7 +51,7 @@ add_action( 'underpin/before_setup', function ( $file, $class ) {
 		}
 
 		// Register the batch stylesheet
-		underpin()->styles()->add( 'batch', [
+		$plugin->styles()->add( 'batch', [
 			'class' => 'Underpin_Styles\Factories\Style_Instance',
 			'args'  => [
 				[
@@ -61,4 +63,5 @@ add_action( 'underpin/before_setup', function ( $file, $class ) {
 			],
 		] );
 	}
-}, 10, 2 );
+	},
+] ) );
