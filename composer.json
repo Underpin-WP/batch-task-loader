@@ -10,9 +10,9 @@
     }
   ],
   "require": {
+    "underpin/underpin": "^2.0",
     "underpin/script-loader": "^1.0",
-    "underpin/style-loader": "^1.0",
-    "underpin/logger-loader": "^2.0"
+    "underpin/style-loader": "^1.0"
   },
   "autoload": {
     "files": [
