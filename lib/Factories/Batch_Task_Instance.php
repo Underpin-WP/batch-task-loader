@@ -7,10 +7,10 @@
  */
 
 
-namespace Underpin_Batch_Tasks\Factories;
+namespace Underpin\Batch_Tasks\Factories;
 
 
-use Underpin_Batch_Tasks\Abstracts\Batch_Task;
+use Underpin\Batch_Tasks\Abstracts\Batch_Task;
 use Underpin\Traits\Instance_Setter;
 
 if ( ! defined( 'ABSPATH' ) ) {

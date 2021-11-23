@@ -7,12 +7,13 @@
  */
 
 
-namespace Underpin_Batch_Tasks\Loaders;
+namespace Underpin\Batch_Tasks\Loaders;
 
-use Underpin\Abstracts\Registries\Loader_Registry;
-use Underpin_Batch_Tasks\Abstracts\Batch_Task;
+use Underpin\Abstracts\Registries\Object_Registry;
+use Underpin\Loaders\Logger;
+use Underpin\Batch_Tasks\Abstracts\Batch_Task;
 use WP_Error;
-use function Underpin\underpin;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -25,14 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @package Underpin\Registries\Loaders
  */
-class Batch_Tasks extends Loader_Registry {
+class Batch_Tasks extends Object_Registry {
 
 	/**
 	 * @inheritDoc
 	 */
-	protected $abstraction_class = 'Underpin_Batch_Tasks\Abstracts\Batch_Task';
+	protected $abstraction_class = 'Underpin\Batch_Tasks\Abstracts\Batch_Task';
 
-	protected $default_factory = 'Underpin_Batch_Tasks\Factories\Batch_Task_Instance';
+	protected $default_factory = 'Underpin\Batch_Tasks\Factories\Batch_Task_Instance';
 
 	/**
 	 * @inheritDoc
@@ -63,7 +64,7 @@ class Batch_Tasks extends Loader_Registry {
 		$batch_task = $this->get( $key );
 
 		if ( is_wp_error( $batch_task ) ) {
-			underpin()->logger()->log_wp_error( 'error', $batch_task );
+			Logger::log_wp_error( 'error', $batch_task );
 
 			return $batch_task;
 		}

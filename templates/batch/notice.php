@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! isset( $template ) || ! $template instanceof Underpin_Batch_Tasks\Abstracts\Batch_Task ) {
+if ( ! isset( $template ) || ! $template instanceof Underpin\Batch_Tasks\Abstracts\Batch_Task ) {
 	return;
 }
 
