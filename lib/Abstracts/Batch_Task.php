@@ -7,12 +7,14 @@
  */
 
 
-namespace Underpin_Batch_Tasks\Abstracts;
+namespace Underpin\Batch_Tasks\Abstracts;
 
 
+use Underpin\Loaders\Logger;
 use Underpin\Traits\Templates;
 use WP_Error;
-use function Underpin\underpin;
+use function Underpin\Batch_Tasks\batch_task_handler;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -180,7 +182,7 @@ abstract class Batch_Task {
 
 				$this->finish_process( $current_tally );
 
-				underpin()->logger()->log(
+				Logger::log(
 					'notice',
 					'batch_action_complete',
 					'The batch action called ' . $this->name . ' is complete.',
@@ -193,12 +195,12 @@ abstract class Batch_Task {
 			$status = $this->task( $current_tally, $i );
 
 			if ( is_wp_error( $status ) ) {
-				underpin()->logger()->log_wp_error( 'batch_error', $status );
+				Logger::log_wp_error( 'batch_error', $status );
 
 				// Bail early if we're supposed to stop when an error occurs.
 				if ( true === $this->stop_on_error ) {
 
-					underpin()->logger()->log(
+					Logger::log(
 						'warning',
 						'batch_action_stopped_early',
 						'The batch action called ' . $this->name . ' stopped early because of an error.',
@@ -240,7 +242,7 @@ abstract class Batch_Task {
 	protected function is_valid() {
 
 		if ( ! current_user_can( $this->capability ) ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'batch_error',
 				'batch_task_invalid_user_permissions',
 				'The specified user does not have the permission to run this task'
@@ -280,16 +282,16 @@ abstract class Batch_Task {
 
 			$batch_params = [ 'total_items' => $this->total_items ];
 
-			underpin()->scripts()->set_param( 'batch', $this->batch_id, $batch_params );
-			underpin()->scripts()->enqueue( 'batch' );
-			underpin()->styles()->enqueue( 'batch' );
+			batch_task_handler()->scripts()->set_param( 'batch', $this->batch_id, $batch_params );
+			batch_task_handler()->scripts()->enqueue( 'batch' );
+			batch_task_handler()->styles()->enqueue( 'batch' );
 			echo $this->get_template( 'notice', [
 				'batch_id'    => $this->batch_id,
 				'message'     => $this->notice_message,
 				'button_text' => $this->button_text,
 			] );
 
-			underpin()->logger()->log(
+			Logger::log(
 				'notice',
 				'batch_task_enqueued',
 				'A batch task was enqueued.',

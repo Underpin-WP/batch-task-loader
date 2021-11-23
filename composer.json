@@ -15,8 +15,9 @@
     "underpin/style-loader": "^1.0"
   },
   "autoload": {
+    "psr-4": {"Underpin\\Batch_Tasks\\":  "lib/"},
     "files": [
-      "batch-tasks.php"
+      "bootstrap.php"
     ]
   }
 }
